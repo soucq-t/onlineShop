@@ -12,14 +12,16 @@ public class Bestellung implements Comparable {
     @Setter
     @Getter
     private int kunde_id;
-    @Setter
-    @Getter
-    private String lieferadresse;
 
-    public Bestellung(int bestellung_id, int kunde_id, String lieferadresse) {
+
+    public Bestellung(Integer bestellung_id, int kunde_id) {
         this.bestellung_id = bestellung_id;
         this.kunde_id = kunde_id;
-        this.lieferadresse = lieferadresse;
+
+    }
+
+    public Bestellung(int kunde_id) {
+        this(null,kunde_id);
     }
 
     @Override

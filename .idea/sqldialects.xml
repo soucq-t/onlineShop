@@ -3,5 +3,7 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/test/resources/CreateSchema.sql" dialect="TSQL" />
     <file url="file://$PROJECT_DIR$/src/test/resources/CreateTestData.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/schema.sql" dialect="TSQL" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testdata.sql" dialect="TSQL" />
   </component>
 </project>

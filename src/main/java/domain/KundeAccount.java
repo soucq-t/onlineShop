@@ -8,7 +8,7 @@ public class KundeAccount {
 
     @Getter
     @Setter
-    private final int kunde_id;
+    private final Integer kunde_id;
     @Getter
     @Setter
     private String username;
@@ -16,18 +16,18 @@ public class KundeAccount {
     @Setter
     private String kennwort;
     @Getter
-    private int order_count=0;
+    @Setter
+    private String lieferadresse;
 
-    public KundeAccount(int kunde_id, String username, String kennwort) {
+    public KundeAccount(Integer kunde_id, String username, String kennwort, String lieferadresse) {
         this.kunde_id = kunde_id;
         this.username = username;
         this.kennwort = kennwort;
+        this.lieferadresse = lieferadresse;
 
     }
 
-    public int increment_order_count()
-    {
-        return order_count++;
+    public KundeAccount(String username, String kennwort, String lieferadresse) {
+      this(null,username,kennwort,lieferadresse);
     }
-
 }

@@ -11,7 +11,7 @@ public class Artikel implements Comparable {
 
     @Getter
     @Setter
-    private final int artikel_id;
+    private final Integer artikel_id;
     @Getter
     @Setter
     private String artikel_name;
@@ -29,13 +29,17 @@ public class Artikel implements Comparable {
     private String artikel_description;
 
 
-    public Artikel(int artikel_id, String artikel_name, double artikel_price, String artikel_description, int kategorie_id, int verkäufer_id) {
+    public Artikel(Integer artikel_id, String artikel_name, double artikel_price, String artikel_description, int kategorie_id, int verkäufer_id) {
         this.artikel_id = artikel_id;
         this.artikel_name = artikel_name;
         this.kategorie_id = kategorie_id;
         this.verkäufer_id = verkäufer_id;
         this.artikel_price = artikel_price;
         this.artikel_description = artikel_description;
+    }
+
+    public Artikel(String artikel_name, double artikel_price, String artikel_description, int kategorie_id, int verkäufer_id) {
+      this(null,artikel_name, artikel_price,  artikel_description,  kategorie_id,  verkäufer_id);
     }
 
     @Override

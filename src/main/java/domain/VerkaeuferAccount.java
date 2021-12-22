@@ -1,6 +1,9 @@
 package domain;
-
+import lombok.Getter;
+import lombok.Setter;
 public class VerkaeuferAccount {
+    @Setter
+    @Getter
     private int kunde_id;
     private String username;
     private String kennwort;

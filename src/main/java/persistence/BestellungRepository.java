@@ -12,7 +12,7 @@ public interface BestellungRepository {
 
     Bestellung buy(KundeAccount kunde) throws SQLException;
 
-    SortedSet<Bestellung> show_deliveries_for_seller(Bestellung bestellung) throws SQLException;
+
 
     SortedSet<Bestellung> show_deliveries_for_buyer(Bestellung bestellung) throws SQLException;
 

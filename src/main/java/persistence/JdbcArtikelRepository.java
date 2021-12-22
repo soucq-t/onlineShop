@@ -28,6 +28,7 @@ public record JdbcArtikelRepository(Connection connection) implements ArtikelRep
         }
 
         return artikel;
+
     }
 
     @Override

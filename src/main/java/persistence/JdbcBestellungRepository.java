@@ -1,6 +1,7 @@
 package persistence;
 
 import domain.Bestellung;
+import domain.BestellungsArtikel;
 import domain.KundeAccount;
 import domain.WarenkorbArtikel;
 
@@ -16,19 +17,26 @@ public record JdbcBestellungRepository(Connection connection) implements Bestell
 
     @Override
     public Bestellung buy(KundeAccount kunde) throws SQLException {
-        var sql = "select * from warenKorbArtikel where war_kA_id = ?";
-        var sql_delete_warenkorb = "delete from warenKorbArtikel where war_kA_id = ?";
+        var sql_show_basket = "select * from warenKorbArtikel where war_kA_id = ?";
+
+        var sql_delete_basket = "delete from warenKorbArtikel where war_kA_id = ?";
+
         Bestellung bestellung = null;
-        try (var statement = connection.prepareStatement(sql)) {
+        try (var statement = connection.prepareStatement(sql_show_basket)) {
             statement.setInt(1, kunde.getKunde_id());
             var resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                kunde.increment_order_count();
-                bestellung = new Bestellung(kunde.getOrder_count(), kunde.getKunde_id(), "?????");
+
+                bestellung = new Bestellung(  kunde.getKunde_id());
+
+                //BestellungsArtikel Objekt wird erzeugt und dann in die zugehörige Tabelle eingetragen
+                BestellungsArtikel bestellungsArtikel = new BestellungsArtikel(bestellung.getBestellung_id(),kunde.getKunde_id());
             }
 
         }
-        try (var statement = connection.prepareStatement(sql_delete_warenkorb)) {
+
+
+        try (var statement = connection.prepareStatement(sql_delete_basket)) {
             statement.setInt(1, kunde.getKunde_id());
             statement.executeUpdate();
 
@@ -37,11 +45,6 @@ public record JdbcBestellungRepository(Connection connection) implements Bestell
         return bestellung;
     }
 
-    @Override
-    public SortedSet<Bestellung> show_deliveries_for_seller(Bestellung bestellung) throws SQLException {
-        return null;
-
-    }
 
     @Override
     public SortedSet<Bestellung> show_deliveries_for_buyer(Bestellung bestellung) throws SQLException {
@@ -51,8 +54,7 @@ public record JdbcBestellungRepository(Connection connection) implements Bestell
             statement.setInt(1, bestellung.getKunde_id());
             var resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                bestellungSortedSet.add(new Bestellung(bestellung.getBestellung_id(), bestellung.getKunde_id(),
-                        bestellung.getLieferadresse()));
+                bestellungSortedSet.add(new Bestellung(bestellung.getBestellung_id(), bestellung.getKunde_id()));
             }
         }
         return bestellungSortedSet;
