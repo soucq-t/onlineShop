@@ -5,30 +5,26 @@ import java.util.Objects;
 public class Article {
     private final Integer id;
     private String name;
-    private double preis;
+    private int peis;
     private String description;
     private final Account seller;
     private final Sorts sort;
 
-    public Article(Integer id, String name, double preis, String description, Account seller, Sorts sort) {
+    public Article(Integer id, String name, Account seller, Sorts sort) {
         this.id = id;
         this.name = name;
-        this.preis = preis;
-        this.description = description;
         this.seller = seller;
         this.sort = sort;
     }
-
-    public Article(String name, double preis, String description, Account seller, Sorts sort) {
-        this(null, name, preis, description, seller, sort);
+    public Article(String name, Account seller, Sorts sort) {
+        this(null, name, seller, sort);
     }
-
     public Integer getId() {
         return id;
     }
 
-    public double getPreis() {
-        return preis;
+    public int getPeis() {
+        return peis;
     }
 
     public String getDescription() {
@@ -38,6 +34,7 @@ public class Article {
     public Account getSeller() {
         return seller;
     }
+
 
 
     public Account getSellter() {
@@ -55,6 +52,7 @@ public class Article {
     public void setName(String name) {
         this.name = name;
     }
+
 
 
     @Override
